@@ -29,10 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
-    private final GradeService gradeService;
     private final GradeMapper gradeMapper;
     private final StudentMapper studentMapper;
-    private final TeacherService teacherService;
 
     @PostMapping
     @Operation(summary = "add a new student to db")
@@ -66,23 +64,14 @@ public class StudentController {
     @Operation(summary = "add a grade to a student")
     public StudentResponseDto addGrade(@PathVariable Long id,
                                        @RequestBody @Valid GradeRequestDto gradeRequestDto) {
-        Student student = studentService.get(id);
         Grade grade = gradeMapper.toModel(gradeRequestDto);
-        grade.getStudent().setId(id);
-        gradeService.add(grade);
-        student.getGrades().add(grade);
-        studentService.update(id, student);
-        return studentMapper.toDto(student);
+        return studentMapper.toDto(studentService.addGrades(id, grade));
     }
 
     @PutMapping("/{id}/assign-teacher/{teacherId}")
     @Operation(summary = "assign a teacher to the student")
     public StudentResponseDto addTeacher(@PathVariable Long id,
                                          @PathVariable Long teacherId) {
-        Teacher teacher = teacherService.get(teacherId);
-        Student student = studentService.get(id);
-        student.getTeachers().add(teacher);
-        studentService.update(id, student);
-        return studentMapper.toDto(student);
+        return studentMapper.toDto(studentService.addTeacher(id, teacherId));
     }
 }

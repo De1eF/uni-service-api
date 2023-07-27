@@ -12,5 +12,7 @@ public interface StudentService {
 
     void delete(Long id);
 
-    void addGrades(Long studentId, Grade grade);
+    Student addGrades(Long studentId, Grade grade);
+
+    Student addTeacher(Long studentId, Long teacherId);
 }

@@ -1,6 +1,7 @@
 package com.budkevych.uniserviceapi.service.impl;
 
 import com.budkevych.uniserviceapi.model.Grade;
+import com.budkevych.uniserviceapi.model.Student;
 import com.budkevych.uniserviceapi.repository.GradeRepository;
 import com.budkevych.uniserviceapi.service.GradeService;
 import com.budkevych.uniserviceapi.service.StudentService;
@@ -13,12 +14,11 @@ import org.springframework.stereotype.Service;
 public class GradeServiceImpl implements GradeService {
     private final GradeRepository gradeRepository;
     private final SubjectService subjectService;
-    private final StudentService studentService;
 
     @Override
     public Grade add(Grade grade) {
         grade.setSubject(subjectService.get(grade.getSubject().getId()));
-        grade.setStudent(studentService.get(grade.getStudent().getId()));
+        grade.setStudent(Student.builder().id(grade.getStudent().getId()).build());
         return gradeRepository.save(grade);
     }
 

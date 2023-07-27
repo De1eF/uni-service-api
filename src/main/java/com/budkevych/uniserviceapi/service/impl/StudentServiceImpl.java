@@ -2,8 +2,11 @@ package com.budkevych.uniserviceapi.service.impl;
 
 import com.budkevych.uniserviceapi.model.Grade;
 import com.budkevych.uniserviceapi.model.Student;
+import com.budkevych.uniserviceapi.model.Teacher;
 import com.budkevych.uniserviceapi.repository.StudentRepository;
+import com.budkevych.uniserviceapi.service.GradeService;
 import com.budkevych.uniserviceapi.service.StudentService;
+import com.budkevych.uniserviceapi.service.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
+    private final GradeService gradeService;
+    private final TeacherService teacherService;
 
     @Override
     public Student add(Student student) {
@@ -36,9 +41,19 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addGrades(Long studentId, Grade grade) {
+    public Student addGrades(Long studentId, Grade grade) {
         Student student = get(studentId);
+        grade.getStudent().setId(studentId);
+        gradeService.add(grade);
         student.getGrades().add(grade);
-        studentRepository.save(student);
+        return update(studentId, student);
+    }
+
+    @Override
+    public Student addTeacher(Long studentId, Long teacherId) {
+        Teacher teacher = teacherService.get(teacherId);
+        Student student = get(studentId);
+        student.getTeachers().add(teacher);
+        return update(studentId, student);
     }
 }

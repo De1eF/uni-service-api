@@ -3,6 +3,7 @@ package com.budkevych.uniserviceapi.service.impl;
 import com.budkevych.uniserviceapi.model.Subject;
 import com.budkevych.uniserviceapi.repository.SubjectRepository;
 import com.budkevych.uniserviceapi.service.SubjectService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,13 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public void delete(Long id) {
         subjectRepository.deleteById(id);
+    }
+
+    @PostConstruct
+    private void init() {
+        add(Subject.builder().name("Math").build());
+        add(Subject.builder().name("History").build());
+        add(Subject.builder().name("Art").build());
+        add(Subject.builder().name("English").build());
     }
 }
