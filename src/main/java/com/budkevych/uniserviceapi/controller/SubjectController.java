@@ -47,8 +47,6 @@ public class SubjectController {
     @Operation(summary = "delete a subject")
     public ActionResponseDto delete(@PathVariable Long id) {
         subjectService.delete(id);
-        return ActionResponseDto.builder()
-                .message("Student deleted on id %s".formatted(id))
-                .build();
+        return new ActionResponseDto("Subject deleted on id %s".formatted(id));
     }
 }

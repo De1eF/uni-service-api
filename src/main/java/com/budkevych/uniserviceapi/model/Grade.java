@@ -2,6 +2,7 @@ package com.budkevych.uniserviceapi.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,9 +22,9 @@ public class Grade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Subject subject;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Student student;
     @Column(name = "grade")
     @Range(min = 1, max = 5)

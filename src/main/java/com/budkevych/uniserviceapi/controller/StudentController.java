@@ -7,11 +7,7 @@ import com.budkevych.uniserviceapi.dto.request.StudentRequestDto;
 import com.budkevych.uniserviceapi.dto.response.ActionResponseDto;
 import com.budkevych.uniserviceapi.dto.response.StudentResponseDto;
 import com.budkevych.uniserviceapi.model.Grade;
-import com.budkevych.uniserviceapi.model.Student;
-import com.budkevych.uniserviceapi.model.Teacher;
-import com.budkevych.uniserviceapi.service.GradeService;
 import com.budkevych.uniserviceapi.service.StudentService;
-import com.budkevych.uniserviceapi.service.TeacherService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -55,9 +51,7 @@ public class StudentController {
     @Operation(summary = "delete a student from db")
     public ActionResponseDto delete(@PathVariable Long id) {
         studentService.delete(id);
-        return ActionResponseDto.builder()
-                .message("Student deleted on id %s".formatted(id))
-                .build();
+        return new ActionResponseDto("Student deleted on id %s".formatted(id));
     }
 
     @PutMapping("/{id}/add-grade")

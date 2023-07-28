@@ -1,10 +1,10 @@
 package com.budkevych.uniserviceapi.service.impl;
 
+import com.budkevych.uniserviceapi.exception.NotFoundException;
 import com.budkevych.uniserviceapi.model.Grade;
 import com.budkevych.uniserviceapi.model.Student;
 import com.budkevych.uniserviceapi.repository.GradeRepository;
 import com.budkevych.uniserviceapi.service.GradeService;
-import com.budkevych.uniserviceapi.service.StudentService;
 import com.budkevych.uniserviceapi.service.SubjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public Grade get(Long id) {
         return gradeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No grade found for id " + id));
+                .orElseThrow(() -> new NotFoundException("No grade found for id " + id));
     }
 
     @Override

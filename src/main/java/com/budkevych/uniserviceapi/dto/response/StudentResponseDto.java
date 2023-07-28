@@ -20,7 +20,4 @@ public class StudentResponseDto {
     private Integer age;
     private List<GradeResponseDto> grades;
     private List<TeacherResponseDto> teacher;
-
-    public StudentResponseDto() {
-    }
 }

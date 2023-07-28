@@ -13,10 +13,7 @@ public class SubjectMapper implements AbstractMapper<
         SubjectResponseDto> {
     @Override
     public SubjectResponseDto toDto(Subject model) {
-        return SubjectResponseDto.builder()
-                .id(model.getId())
-                .name(model.getName())
-                .build();
+        return new SubjectResponseDto(model.getId(), model.getName());
     }
 
     @Override

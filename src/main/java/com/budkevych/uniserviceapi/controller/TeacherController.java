@@ -47,8 +47,6 @@ public class TeacherController {
     @Operation(summary = "delete a teacher")
     public ActionResponseDto delete(@PathVariable Long id) {
         teacherService.delete(id);
-        return ActionResponseDto.builder()
-                .message("Student deleted on id %s".formatted(id))
-                .build();
+        return new ActionResponseDto("Teacher deleted on id %s".formatted(id));
     }
 }

@@ -15,7 +15,4 @@ public class GradeResponseDto {
     private Long id;
     private SubjectResponseDto subject;
     private Integer grade;
-
-    public GradeResponseDto() {
-    }
 }

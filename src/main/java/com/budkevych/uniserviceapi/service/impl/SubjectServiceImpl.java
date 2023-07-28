@@ -1,5 +1,6 @@
 package com.budkevych.uniserviceapi.service.impl;
 
+import com.budkevych.uniserviceapi.exception.NotFoundException;
 import com.budkevych.uniserviceapi.model.Subject;
 import com.budkevych.uniserviceapi.repository.SubjectRepository;
 import com.budkevych.uniserviceapi.service.SubjectService;
@@ -20,7 +21,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public Subject get(Long id) {
         return subjectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No subject found for id " + id));
+                .orElseThrow(() -> new NotFoundException("No subject found for id " + id));
     }
 
     @Override
@@ -36,7 +37,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @PostConstruct
-    private void init() {
+    public void init() {
         add(Subject.builder().name("Math").build());
         add(Subject.builder().name("History").build());
         add(Subject.builder().name("Art").build());

@@ -1,5 +1,6 @@
 package com.budkevych.uniserviceapi.service.impl;
 
+import com.budkevych.uniserviceapi.exception.NotFoundException;
 import com.budkevych.uniserviceapi.model.Teacher;
 import com.budkevych.uniserviceapi.repository.TeacherRepository;
 import com.budkevych.uniserviceapi.service.TeacherService;
@@ -19,7 +20,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher get(Long id) {
         return teacherRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No teacher found for id " + id));
+                .orElseThrow(() -> new NotFoundException("No teacher found for id " + id));
     }
 
     @Override
