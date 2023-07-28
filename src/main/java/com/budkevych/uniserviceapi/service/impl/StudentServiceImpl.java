@@ -57,4 +57,21 @@ public class StudentServiceImpl implements StudentService {
         student.getTeachers().add(teacher);
         return update(studentId, student);
     }
+
+    @Override
+    public Student removeGrades(Long studentId, Long gradeId) {
+        Student student = get(studentId);
+        Grade toRemove = gradeService.get(gradeId);
+        student.getGrades().remove(toRemove);
+        gradeService.delete(gradeId);
+        return update(studentId, student);
+    }
+
+    @Override
+    public Student removeTeacher(Long studentId, Long teacherId) {
+        Teacher teacher = teacherService.get(teacherId);
+        Student student = get(studentId);
+        student.getTeachers().remove(teacher);
+        return update(studentId, student);
+    }
 }

@@ -127,6 +127,24 @@ public class StudentServiceRepositoryIntegrationTest {
     }
 
     @Test
+    public void studentRemoveGradeGetOk() {
+        Student student = getStudent();
+        student = studentService.add(student);
+
+        Grade grade = Grade.builder()
+                .student(student)
+                .grade(5)
+                .subject(Subject.builder().id(1L).build())
+                .build();
+        studentService.addGrades(student.getId(), grade);
+
+        studentService.removeGrades(student.getId(), 1L);
+
+        Student actual = studentService.get(student.getId());
+        Assertions.assertEquals(List.of(), actual.getGrades());
+    }
+
+    @Test
     public void studentAddTeacherGetOk() {
         Student student = getStudent();
         student = studentService.add(student);
@@ -153,6 +171,27 @@ public class StudentServiceRepositoryIntegrationTest {
         Long studentId = student.getId();
         Assertions.assertThrows(NotFoundException.class,
                 () -> studentService.addTeacher(studentId, 99L));
+    }
+
+    @Test
+    public void studentRemoveTeacherGetOk() {
+        Student student = getStudent();
+        student = studentService.add(student);
+
+        Teacher teacher = Teacher.builder()
+                .name("a")
+                .surname("b")
+                .students(new HashSet<>())
+                .subject(Subject.builder().id(1L).build())
+                .build();
+        teacher = teacherService.add(teacher);
+
+        studentService.addTeacher(student.getId(), teacher.getId());
+
+        studentService.removeTeacher(student.getId(), teacher.getId());
+
+        Student actual = studentService.get(student.getId());
+        Assertions.assertEquals(Set.of(), actual.getTeachers());
     }
 
     private Student getStudent() {

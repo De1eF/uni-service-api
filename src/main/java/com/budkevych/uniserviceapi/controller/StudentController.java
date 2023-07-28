@@ -68,4 +68,18 @@ public class StudentController {
                                          @PathVariable Long teacherId) {
         return studentMapper.toDto(studentService.addTeacher(id, teacherId));
     }
+
+    @PutMapping("/{id}/remove-grade/{gradeId}")
+    @Operation(summary = "add a grade to a student")
+    public StudentResponseDto removeGrade(@PathVariable Long id,
+                                          @PathVariable Long gradeId) {
+        return studentMapper.toDto(studentService.removeGrades(id, gradeId));
+    }
+
+    @PutMapping("/{id}/remove-teacher/{teacherId}")
+    @Operation(summary = "assign a teacher to the student")
+    public StudentResponseDto removeTeacher(@PathVariable Long id,
+                                         @PathVariable Long teacherId) {
+        return studentMapper.toDto(studentService.removeTeacher(id, teacherId));
+    }
 }

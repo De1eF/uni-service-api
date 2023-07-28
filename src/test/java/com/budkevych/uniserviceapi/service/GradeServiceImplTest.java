@@ -19,6 +19,8 @@ class GradeServiceImplTest {
     private GradeServiceImpl gradeService;
     @Mock
     private GradeRepository gradeRepository;
+    @Mock
+    private SubjectService subjectService;
 
     @Test
     void addOk() {
@@ -28,6 +30,11 @@ class GradeServiceImplTest {
         Grade expected = getGrade();
         expected.setId(1L);
 
+        Mockito.when(subjectService.add(new Subject())).thenReturn(
+                Subject.builder()
+                .id(1L)
+                .name("Math")
+                .build());
         Mockito.when(gradeRepository.save(grade)).thenReturn(fromDB);
 
         Grade actual = gradeService.add(grade);

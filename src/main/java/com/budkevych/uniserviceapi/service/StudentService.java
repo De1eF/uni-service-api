@@ -14,5 +14,9 @@ public interface StudentService {
 
     Student addGrades(Long studentId, Grade grade);
 
+    Student removeGrades(Long studentId, Long gradeId);
+
     Student addTeacher(Long studentId, Long teacherId);
+
+    Student removeTeacher(Long studentId, Long teacherId);
 }
