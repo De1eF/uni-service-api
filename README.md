@@ -1,4 +1,4 @@
-﻿# Uni Service API
+﻿# University Tracker Service API
 A simple API for controlling university sites with students, teachers, and grades
 <h2>Sturcture</h2>
  <ul>
