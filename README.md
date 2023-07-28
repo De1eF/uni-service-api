@@ -1,5 +1,5 @@
 ﻿# Uni Service API
-A simple API for controlling university site with students, teachers and grades
+A simple API for controlling university sites with students, teachers, and grades
 <h2>Sturcture</h2>
  <ul>
   <li>Student ( Name, Surname, Grade list, Teacher list )</li>
@@ -23,7 +23,7 @@ A simple API for controlling university site with students, teachers and grades
  </ul>
 <h2>How to run</h2>
  <ul>
-  <li>Make sure you have JDK 17, Maven 3 and Docker installed</li>
+  <li>Make sure you have JDK 17, Maven 3, and Docker installed</li>
   <li>Pull project from this repository</li>
   <li>Run `mvn package`</li>
   <li>Run `docker -t build delef/uni-service-api .`</li>
